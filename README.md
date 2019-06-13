@@ -1,4 +1,4 @@
-# PbBA Merchant Button Library - Web
+# PbBa Merchant Button Library - Web
 
 The **Pay by Bank app** Web Merchant Button Library makes it easy for you to add Pay by Bank app as a new payment method.
  
