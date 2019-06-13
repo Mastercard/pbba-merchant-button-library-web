@@ -100,6 +100,10 @@ function zAddEventListener(type, listener)
         "2.0.7": {
             path: "2.0.7",
             file: "button.js"
+        },
+        "3.0.0": {
+            path: "3.0.0",
+            file: "button.js"
         }
     };
 

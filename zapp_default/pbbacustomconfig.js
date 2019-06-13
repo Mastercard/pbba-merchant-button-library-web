@@ -26,10 +26,10 @@ limitations under the License. */
 
 /* Define the PBBA variables */
 
-var zappVersion = "2.0.7"; // Current web merchant button library version.
+var zappVersion = "3.0.0"; // Current web merchant button library version.
 var cookieManagementUrl = "https://www.paybybankapp.co.uk/" // Cookie management URL for PayConnect.
 var merchantPollInterval = 5000; // Default merchant poll interval of 5 seconds to poll the merchant server for payment notification.
-var hoverOverPopupEnabled = true; // Flag to enable or disable the hover over popup
+var cfiLogosURL; // CDN location to fetch the CFI logos
 
 
 /* Initialize PayConnect. */
@@ -251,5 +251,5 @@ zapp.load(zappVersion, {
 	},
 	cookieManagementUrl: cookieManagementUrl,
 	merchantPollInterval: merchantPollInterval,
-    hoverOverPopupEnabled: hoverOverPopupEnabled
+	cfiLogosURL: cfiLogosURL
 });
