@@ -112,13 +112,19 @@ function zAddEventListener(type, listener)
         "3.1.0": {
             path: "3.1.0",
             file: "button.js"
+        },
+        "3.1.1": {
+            path: "3.1.1",
+            file: "button.js"
         }
     };
 
     zapp.addJsFile = function(url)
     {
-        document.write('<' + 'script src="' + url + '"' +
-            ' type="text/javascript"><' + '/script>');
+    	var script=document.createElement('script');
+		script.setAttribute('src',url);
+		script.setAttribute('type','text/javascript');
+		document.getElementsByTagName('head')[0].appendChild(script);
     };
 
     zapp.url = urlofdoc('zapp.js');
