@@ -1,23 +1,31 @@
-# ZappWebMerchantButton-R2
+# PbBa Merchant Button Library - Web
 
-The **Pay by Bank app** Web Merchant Button Library makes it easy for you to add Pay by Bank app as a new payment method.
- 
-The Web Merchant Library should be used alongside the Pay by Bank app Web Merchant Button Developer Guide documentation that is available separately to Participants of Pay by Bank app.
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
+## Overview <a name="overview"></a>
+The **Pay by Bank app** Merchant Library for Web makes it easy for you to add Pay by Bank app as a new payment method.
+The Pay by Bank app (PBBA) Web Merchant Button supports two different models:
+ 1. Pay by Bank app Branded Web Merchant Button with Pay by Bank app pop-up
+ 2. Pay by Bank app Integrated Web Merchant Button with Pay by Bank app pop-up
 
-## License
+## Integration and Usage <a name="usage"></a>
+The Merchant Library should be used alongside the Pay by Bank app Developer Guide documentation that is available separately to Participants of Pay by Bank app.
+For more information please use the implementation guides inside official releases
+[Github repository](https://github.com/Mastercard/pbba-merchant-button-library-web/releases)
 
-```
-Copyright 2016 IPCO 2012 Limited
+## Contributing
+For major changes, please open an issue first to discuss what you would like to change.
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+Please make sure to update tests as appropriate.
 
-   http://www.apache.org/licenses/LICENSE-2.0
+## License <a name="license"></a>
+Copyright 2020 Mastercard
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
+the License. You may obtain a copy of the License at:
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+specific language governing permissions and limitations under the License.
