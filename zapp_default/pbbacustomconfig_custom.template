@@ -22,20 +22,35 @@ jQuery.support.cors = true;
 if (!window.console) console = {log: function() {}};
 
 /* Define the PBBA variables */
-var zappVersion = "2.0.0"; // Current web merchant button library version.
-var cookieManagementUrl = "https://www.paybybankapp.co.uk/"; // Cookie management URL for PayConnect.
+var zappVersion = "3.1.1"; // Current web merchant button library version.
+var cookieManagementUrl = "https://paybybankappcookie.mastercard.co.uk/static/cookie-management/pbba-3550ce7763041531b9214e9e23986b37/"; // Cookie management URL for PayConnect.
 var merchantPollInterval = 5000; // Merchant poll interval of 5 seconds to poll the merchant server for payment notification.
+var cfiLogosURL = "https://paybybankappcdn.mastercard.co.uk/static/ml/pbba-3550ce7763041531b9214e9e23986b37/merchant-lib/banks.json"; // CDN location to fetch the CFI logos
 
 var clickedButton = null; // This variable holds the reference to the custom button
 
-/* Initialise the custom button engine and set the cookie management URL */
+/* Initialise the custom button engine and set the cookie management URL and the CDN location to fetch the CFI logos from */
 zapppopup.load(zappVersion, {
-	cookieManagementUrl: cookieManagementUrl
+	cookieManagementUrl: cookieManagementUrl,
+	cfiLogosURL: cfiLogosURL
 } );
 
 /* Initialise PayConnect */
 window.onload = function() {
 	setupPayConnect(cookieManagementUrl, document); 
+}
+
+/* Functions to format and return the timezone offset */
+function format(value) {
+	return value < 10 ? '0' + value : value;
+}
+
+function getUTCOffset(date) {
+	var sign = (date.getTimezoneOffset() > 0) ? "-" : "+";
+	var offset = Math.abs(date.getTimezoneOffset());
+	var hours = format(Math.floor(offset / 60));
+	var minutes = format(offset % 60);
+	return sign + hours + ":" + minutes;
 }
 
 /* Define the event listeners for the custom merchant button*/
@@ -86,20 +101,26 @@ function postPaymentRequestToMechantServer(clickedBtn) {
 				clickedButton = clickedBtn; // This is the custom button reference
 
 		/* 
-		 * The only data that is required to be posted to the merchant server from the PBBA Web Merchant Button is the pcid.
+		 * The only data that is required to be posted to the merchant server from the PBBA Web Merchant Button is the pcid and the browserInfo.
 		 * merchantRequestToPayPostData is the merchant's request to pay object that is posted to the merchant's server.
 		 * 
 		 */
 			
 		/*
 		 *  The below merchantRequestToPayPostData is a JSON object defined by merchant to hold the checkout information 
-		 *  and other things, in addition to all of merchants data element, they have to include the payConnectID element 
+		 *  and other things, in addition to all of merchants data element, they have to include the payConnectID element and the browserInfo element 
 		 *  to this object.
 		 *  
 		 */
 	
 				var merchantRequestToPayPostData = {
-						"payConnectID" : zapppopup.getCookie('pcid'); //Merchant specific JSON object merchantRequestToPayPostData.payConnectID
+						"payConnectID" : zapppopup.getCookie('pcid');
+						"browserInfo" : {
+							"userAgent": navigator.userAgent,
+				            "timeZone": getUTCOffset(new Date()),
+				            "screen": screen.width+"x"+screen.height,
+							"activeHeaders": "Accept-Encoding:*;Accept-Language:en"
+						}
 				};
 	
 		/* 
@@ -251,8 +272,8 @@ function pollMerchantServerForPaymentNotification(secureToken) {
 							}, merchantPollInterval);
 						
 						// Check for the response status from the polled server. If the status is success (indicating an authorised or a declined transaction) then do the following:
-						
-							// Stop the timers and close the popup
+						// Stop the timers and close the popup
+							
 							zapppopup._stopTimers();
 							zapppopup._removePopup(true);
 						
@@ -271,8 +292,8 @@ function pollMerchantServerForPaymentNotification(secureToken) {
 					},
 					error : function(merchantGetPaymentStatusObject) {
 						// Error handling
-						
 						// Stop the polling process and then do the following:
+						
 						zapppopup._stopTimers(); // Stop the timers
 						zapppopup._removePopup(true); // Remove the popup
 					}
