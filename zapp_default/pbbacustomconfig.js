@@ -1,4 +1,4 @@
-/** Copyright 2016 IPCO 2012 Limited
+/** Copyright (c) 2020 Mastercard
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -26,11 +26,10 @@ limitations under the License. */
 
 /* Define the PBBA variables */
 
-var zappVersion = "2.0.0"; // Current web merchant button library version.
-var cookieManagementUrl = "https://www.paybybankapp.co.uk/" // Cookie management URL for PayConnect.
-var imageKey = 1; // Default imageKey is 1 for the standard Pay By Bank App Web Merchant Button.
+var zappVersion = "3.1.2"; // Current web merchant button library version.
+var cookieManagementUrl = "https://paybybankappcookie.mastercard.co.uk/static/cookie-management/pbba-3550ce7763041531b9214e9e23986b37/" // Cookie management URL for PayConnect.
 var merchantPollInterval = 5000; // Default merchant poll interval of 5 seconds to poll the merchant server for payment notification.
-var hoverOverPopupEnabled = true; // Flag to enable or disable the hover over popup
+var cfiLogosURL= "https://paybybankappcdn.mastercard.co.uk/static/ml/pbba-3550ce7763041531b9214e9e23986b37/merchant-lib/banks.json"; // CDN location to fetch the CFI logos
 
 
 /* Initialize PayConnect. */
@@ -251,7 +250,6 @@ zapp.load(zappVersion, {
 		/* Place any other error handling logic here */
 	},
 	cookieManagementUrl: cookieManagementUrl,
-	imageKey: imageKey,
 	merchantPollInterval: merchantPollInterval,
-    hoverOverPopupEnabled: hoverOverPopupEnabled
+	cfiLogosURL: cfiLogosURL
 });

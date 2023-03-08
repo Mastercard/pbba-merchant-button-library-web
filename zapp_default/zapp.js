@@ -1,4 +1,4 @@
-/** Copyright 2016 IPCO 2012 Limited
+/** Copyright (c) 2020 Mastercard
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -80,29 +80,18 @@ function zAddEventListener(type, listener)
     zapp.register = "registered"
     
     zapp.versions = {
-        "1.0.0": {
-            path: "1.0.0",
-            file: "button.js"
-        },
-        "1.1.0": {
-            path: "1.1.0",
-            file: "button.js"
-        },
-        // adding new version
-        "1.2.0": {
-            path: "1.2.0",
-            file: "button.js"
-        },
-        "2.0.0": {
-            path: "2.0.0",
+        "3.1.2": {
+            path: "3.1.2",
             file: "button.js"
         }
     };
 
     zapp.addJsFile = function(url)
     {
-        document.write('<' + 'script src="' + url + '"' +
-            ' type="text/javascript"><' + '/script>');
+    	var script=document.createElement('script');
+		script.setAttribute('src',url);
+		script.setAttribute('type','text/javascript');
+		document.getElementsByTagName('head')[0].appendChild(script);
     };
 
     zapp.url = urlofdoc('zapp.js');
@@ -138,7 +127,7 @@ function zAddEventListener(type, listener)
             throw "ZAPP LOADER - Version " + version + " not found";
         
         this.version = version;
-        this.libUrl = this.url + this.versions[version].path + "/";
+        this.libUrl = this.url + this.versions[version].path;
 
         this.addJsFile(this.libUrl + "/js/" + this.versions[this.version].file, 'Zapp' + this.version);
 
@@ -192,7 +181,7 @@ function refreshPcidIframe(url) {
 	var iframe = document.getElementById('pcid-iframe');
 	if (typeof iframe != 'undefined' && iframe != null) {
 		if (iframe.src.indexOf("cookie-management") == -1)
-			iframe.src = url + "cookie-management/index.html";
+			iframe.src = url + "index.html";
 	}
 }
 
@@ -226,7 +215,7 @@ function createPcidIframe(url, document) {
 		 iframe.id="pcid-iframe";
 	     iframe.style.display = "none";
 	     doc.body.appendChild(iframe);
-	     iframe.src = url + "cookie-management/index.html";
+	     iframe.src = url + "index.html";
 	}
 	return iframe;
 }
@@ -259,7 +248,7 @@ function redirectToCookieManagementUrl(url, pcid, cookieExpiryDays) {
            if (xmlhttp.status == 200) {
         	   console.log(url + " is reachable.");
         	   setTimeout(function(){
-           			window.location.href = url +  "cookie-management/index.html?pcid="+pcid+"&cookieExpiryDays="+cookieExpiryDays;
+           			window.location.href = url +  "index.html?pcid="+pcid+"&cookieExpiryDays="+cookieExpiryDays;
            		}, 10);
            		deleteCookie(TP_COOKIE_DISABLED_COOKIE);     
            } else {
@@ -268,7 +257,7 @@ function redirectToCookieManagementUrl(url, pcid, cookieExpiryDays) {
         }
     };
     
-    xmlhttp.open("HEAD", url +  "cookie-management/index.html", true);
+    xmlhttp.open("HEAD", url +  "index.html", true);
     xmlhttp.send();
 	
 }
